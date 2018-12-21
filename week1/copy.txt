@@ -1,0 +1,73 @@
+Font family: Overpass Mono Regular
+
+Intro: 38px/1.2
+Body: 18px/1.5
+Overlay h1: 32px
+Overlay p: 20px
+Overlay a: 32px
+
+Colors:
+Black #000
+White #FFF
+Turquoise #00FFFF
+Yellow #FFFF00
+Blue #0525FF
+Pink #FF00E6
+
+
+
+Copy:
+
+Nav:
+About
+Journal
+Shop 
+Contact
+
+Intro:
+Lost in Tokyo is a directory of fun places to see, play in and explore, in Tokyo, Japan. From museums and galleries, to Robot Restaurants and kitten cafes, Tokyo is the gift that keeps on giving. Dattebayo!
+
+Image 1:
+Mori Art Museum
+The Mori Art Museum strives to be a place for enjoyment, stimulation and discussion - a place where what is important in our culture and society is openly debated
+
+Image 2:
+Robot Restaurant
+Located in Shinjuku, the Robot Restaurant features a raucous pop-culture show with robotic monsters, dancers & lasers. A weird but wonderfully exciting experience. 
+
+Image 3:
+JBS Jazz Bar
+Home to over 10,000 records, JBS Jazz Bar is burrowed away in Shibuya. If simplicity, vinyl and fine whisky are what you’re in search of, this place is for you. 
+
+Image 4:
+Nyan da Neko
+If you love coffee, but you love cats more, Nyan da Neko is worthy of a visit. Located in Odaiba, you can enjoy your beverage with the company of up to 40 cats. Meow. 
+
+Image 5:
+Yayoi Kusama Museum
+It could be said that it is Kusama’s second golden age. So after much anticipation, the Yayoi Kusama Museum finally opened its doors. We recommend getting tickets, as it’s deservingly popular. 
+
+Image 6:
+Mount Zine
+Selling every zine they’re presented with, Mount Zine replace their stock every 6 months. Simply have a browse, or join one of the zine-making workshops they regularly host. 
+
+Image 7:
+Sanrio Puroland
+An indoor theme park with appearances from Hello Kitty, My Melody, Cinnamoroll and many more. Need we say more?
+
+Image 8:
+Sumida Hokusai Museum
+Now a cultural landmark in Tokyo, the Hokusai Museum amalgamates modern architecture and the artist’s traditional woodblock prints. It’s definitely worth checking out. 
+
+Image 9:
+Ghibli Museum
+A short ride outside of Tokyo, the Ghibli museum showcases the work of Studio Ghibli – the creators of Spirited Away, My Neighbour Totoro and many other Anime feature films. This is one for the animation-lovers. 
+
+Image 10:
+Big Love Records
+Located in Harajuku, Big Love Records is aptly named, as it is run by husband and wife Masashi Naka and Haruka Hirata. Every vinyl, cassette, CD and zine in the store is picked by Naka and Haruka because they love it, and it means something to them or each other. We have a big love for Big Love. 
+
+Footer:
+Back to top
+
+
