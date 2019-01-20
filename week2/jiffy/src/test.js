@@ -1,40 +1,3 @@
-// http://superguides.netlify.com/react/jiffy/#jiffy-introduction
-
-import React, { Component } from 'react';
-// here we import in our loader spinner as an image
-import loader from './images/loader.svg';
-import clearButton from './images/close-icon.svg';
-import Gif from './Gif';
-
-const randomChoice = arr => {
-  const randIndex = Math.floor(Math.random() * arr.length);
-  return arr[randIndex];
-};
-
-// we pick out our props inside the header components
-// we can pass down functions as props as well as things
-// like numbers, strings, arrays or objects
-const Header = ({clearSearch, hasResults}) => (
-  <div className="header grid">
-    {/* if we have results, show the clear button, otherwise show the title */}
-    {hasResults ? (
-      <button onClick={clearSearch}>
-        <img src={clearButton} />
-      </button>
-    ) : (
-      <h1 className="title">Jiffy</h1>
-    )}
-  </div>
-);
-
-const UserHint = ({loading, hintText}) => (
-  <div className="user-hint">
-    {/* here we Check whether we have a loading state and render out
-        eitehr our spinner or hintText based on that, using a ternary operator */}
-    {loading ? <img src={loader} className="block mx-auto" /> : hintText}
-  </div>
-)
-
 class App extends Component {
 
   constructor(props) {
@@ -42,7 +5,7 @@ class App extends Component {
     this.state = {
       searchTerm: '',
       hintText: 'Hit enter to search',
-      //gif: null,
+      gif: null,
       // we have an array of gifs
       gifs:[]
     }
@@ -55,11 +18,6 @@ class App extends Component {
   // async/await style of function
   searchGiphy = async searchTerm => {
     //first we tru our fetch
-    this.setState({
-      // here we set our loading state to be true
-      // and this will show the spinner at the bottom
-      loading: true
-    })
     try{
       // here we use the await keyword to wait for our respnse to come back
       const response = await fetch(
@@ -72,13 +30,6 @@ class App extends Component {
 
       // console.log(data);
 
-      // here we check if the array of results is empty
-      // is it is, we throw an error which will stop the code here
-      // and handle it in the catch area
-      if(!data.length){
-        throw `Nothing found for ${searchTerm}`
-      }
-
       // here we grab a random result from our images
       const randomGif = randomChoice(data);
 
@@ -86,23 +37,15 @@ class App extends Component {
         ...preState,
         // get the first result and put it in the state
         // gif: data[0]
-        //gif: randomGif,
+        gif: randomGif,
         // here we use our spread to take the previous gifs and spread them out,
         // and then add our new random gif onto the end
-        gifs: [...preState.gifs, randomGif],
-        // we turn off our loading spinner again
-        loading: false,
-        hintText: `Hit enter to see more ${searchTerm}`
+        gifs: [...preState.gifs, randomGif]
       }));
 
     // if our fetch fails, we catch it down here
     }catch (error) {
-      this.setState((prevState, props) => ({
-        ...prevState,
-        hintText: error,
-        loading: false
-      }))
-      console.log(error);
+
     }
   };
 
@@ -141,40 +84,28 @@ class App extends Component {
     //console.log(event.key);
   };
 
-  // here we reset our state by clearing everything out and
-  // making it default again (like in our original state)
-  clearSearch = () => {
-    this.setState((prevState, props) => ({
-      ...prevState,
-      searchTerm: '',
-      hintText: '',
-      gifs:[]
-    }))
-    // here we grab the input and then focus the cursor back into it
-    this.textInput.focus();
-    // https://reactjs.org/docs/refs-and-the-dom.html
-  };
-
   render() {
     // const searchTerm = this.state.searchTerm;
-    const {searchTerm, gifs} = this.state;
-    // here we set a variable to see if we have any gifs
-    const hasResults = gifs.length;
-
+    const {searchTerm, gif} = this.state;
     return (
       <div className="page">
-        <Header clearSearch={this.clearSearch} hasResults={hasResults} />
-
+        <Header />
         <div className="search grid">
           {/* our stack of gif images */}
 
-          {/* here we loop over our array of gif images from our state
-          and we create multiple viseos from it */}
-
-          {this.state.gifs.map(gif => (
-            // we spread out all of our properties onto our Gif component
-            <Gif {...gif} />
-          ))}
+          {/* it's only going to render our video when we have a gif in the state
+            we can test it using && */}
+          {gif &&
+            <video
+              className = "grid-item video"
+              autoPlay
+              loop
+              src={gif.images.original.mp4}
+            />
+          /* 本来应是 src={this.state.gif.images.original.mp4}
+            前面的const searchTerm = this.state;改成了const {searchTerm, gif} = this.state;
+            于是就可以在这里省略this.state.gif.images.original.mp4*/
+          }
 
           <input
             className="input grid-item"
@@ -182,9 +113,6 @@ class App extends Component {
             onChange={this.handleChange}
             onKeyPress={this.handleKeyPress}
             value = {searchTerm}
-            ref = {input => {
-              this.textInput = input;
-            }}
           />
         </div>
 
