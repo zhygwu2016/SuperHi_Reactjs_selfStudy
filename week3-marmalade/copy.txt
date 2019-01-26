@@ -1,0 +1,31 @@
+Copy:
+
+Marmalade.fm features the latest and greatest in grooves, beats and world music.
+
+Whether you’re into hip hop, trip hop, classic jazz, fusion jazz, afro beat or break beat… we have you covered!
+
+Featuring…
+11 mixes
+
+Played…
+114748 times
+
+With…
+64851 seconds
+
+Fonts:
+
+Work Sans
+Anton
+Biryani
+
+Featured: 4rem/1
+Heading: 1.5rem/1.5
+Nav: 0.875rem/1.5
+Copy: 1.25rem/1.5
+
+Colors:
+
+Orange: #FF9500
+Gray: #5C5C5C
+Black: #000
