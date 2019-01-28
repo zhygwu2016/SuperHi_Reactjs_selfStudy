@@ -13,8 +13,7 @@ const Home = ({mixes, ...props}) => (
         <Mix {...props} {...mix} id={mix.key} />
       </div>
     ))}
-
-
+    
     {/* <div className="mix mb4">
       <Mix name="Ambient Treasures"
         id='/salvatore-muscat/ambient-treasures-vol1-towards-the-dream/'
