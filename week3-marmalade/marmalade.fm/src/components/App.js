@@ -7,6 +7,7 @@ import Header from './Header';
 import Home from './Home';
 import Archive from './Archive';
 import About from './About';
+import Show from './Show';
 
 // we import our mix data
 import mixesData from '../data/mixes';
@@ -26,34 +27,65 @@ class App extends Component {
     };
   }
 
-  // /yazcine/bal-dambiances-ruh-special-guests-collab-by-skyecatcher-and-neon-jesus/
+  // fetchMixes = async () => {
+  //
+  //   const {mixIds} = this.state;
+  //   //console.log(mixIds);
+  //
+  //   // here we loop over our mix ids and fetch each other
+  //   mixIds.map(async id => {
+  //     try {
+  //       // always remember await when using fetch in an async function
+  //       const response = await fetch (
+  //         //'https://api.mixcloud.com/yazcine/bal-dambiances-ruh-special-guests-collab-by-skyecatcher-and-neon-jesus/'
+  //         // we add the id onto the end of our url as a dynamic segment
+  //         `https://api.mixcloud.com${id}`
+  //       );
+  //       const data = await response.json();
+  //       // put the mix into our state
+  //       this.setState((prevState, props) => ({
+  //         // here we add our data onto the end of all of previous state using the spread
+  //         mixes: [...prevState.mixes, data]
+  //       }));
+  //
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   })
+  //
+  // };
 
+  // https://github.com/superhi/marmalade-fm/blob/17665becad3032b99d258b7336b1708b438993ec/src/components/App.js#L29-L59
   fetchMixes = async () => {
-
     const {mixIds} = this.state;
-    //console.log(mixIds);
 
-    // here we loop over our mix ids and fetch each other
-    mixIds.map(async id => {
+    // we `reduce` over the mixes to make sure they're always returned in order,
+    // if we used `map` here instead whichever mix came back from the api first
+    // would be the one set first in the state
+    const mixes = await mixIds.reduce(async (asyncMixes, id) => {
       try {
-        // always remember await when using fetch in an async function
-        const response = await fetch (
-          //'https://api.mixcloud.com/yazcine/bal-dambiances-ruh-special-guests-collab-by-skyecatcher-and-neon-jesus/'
-          // we add the id onto the end of our url as a dynamic segment
-          `https://api.mixcloud.com${id}`
-        );
+        // always remember to `await` when using fetch in an async function
+        // we add the id onto the end of our url as a dynamic segment
+        const response = await fetch(`https://api.mixcloud.com${id}`);
         const data = await response.json();
-        // put the mix into our state
-        this.setState((prevState, props) => ({
-          // here we add our data onto the end of all of previous state using the spread
-          mixes: [...prevState.mixes, data]
-        }));
-
+        // because this callback inside our `reduce` is an async function we need
+        // to get our `mixes` back out of the promise before we can add the new mix,
+        // we can do this by `await`ing them
+        const mixes = await asyncMixes;
+        // now we can add our `data` onto the end of all of the rest of the `mixes`
+        // with an array spread
+        return [...mixes, data];
       } catch (error) {
         console.log(error);
+        return mixes;
       }
-    })
+      // the initial value of `mixes` is an empty array wrapped in a promise.
+      // this means that line 44 will work the first time through the `mixIds`
+      // as well as every other time
+    }, Promise.resolve([]));
 
+    // and finally set the `mixes` to our state
+    this.setState({mixes});
   };
 
 
@@ -168,11 +200,19 @@ class App extends Component {
                 {...this.actions} />} />
               <Route path="/archive" render={() => <Archive {...this.state}
                 {...this.actions} />} />
-              <Route path="/about" render={() => <About {...this.state}
-                {...this.actions} />} />
+              <Route path="/about" render={() => <About {...this.state} />} />
+
+              <Route
+                path="/show/:slug"
+                // here we pass in the route params so that we can access the
+                // url of the current show page
+                render={routeParams => <Show {...routeParams} {...this.state}
+                />}
+              />
+
             </div>
           </div>
-          
+
           {/* AudioPlayer */}
           <iframe
             width="100%"

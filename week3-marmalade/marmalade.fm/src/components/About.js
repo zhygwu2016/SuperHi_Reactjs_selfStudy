@@ -1,23 +1,11 @@
 import React from 'react';
+import Stat from './Stat';
 
-const Stat = ({statName, statNumber, statWord}) => (
-  <div
-    className="w-third tc pa3 ba bw2 b--light-gray"
-    style={{marginRight: -2}}
-  >
-    <div className="f6 biryani ttu">
-      {statName}
-    </div>
-    <div className="f5 b biryani-black ttu tracked">
-      {statNumber} {statWord}
-    </div>
-  </div>
-)
 
 const About = ({mixes}) => (
-  <div className="ph3 ph4-l">
-    <div className="measure center 1h-copy f4 ph3">
-      <p>
+  <div className="measure center">
+    <div className="1h-copy mb4">
+      <p className="mt0">
         Marmalade.fm features the latest and greatest in grooves, beats and
         world music.
       </p>
@@ -28,7 +16,7 @@ const About = ({mixes}) => (
       </p>
     </div>
 
-    <div className="flex pt3">
+    <div className="">
       <Stat statName="Featuring..." statNumber={mixes.length} statWord="mixes" />
       {/* play_count */}
       <Stat

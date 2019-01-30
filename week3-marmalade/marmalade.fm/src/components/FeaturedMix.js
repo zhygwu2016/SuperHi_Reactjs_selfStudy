@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PlayMix from './PlayMix';
 import PlayButton from './PlayButton';
 
