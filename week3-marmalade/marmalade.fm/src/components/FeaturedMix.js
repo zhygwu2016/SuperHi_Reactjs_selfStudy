@@ -11,7 +11,7 @@ const FeaturedMix = ({name, pictures = {}, ...props}) => (
     <PlayMix {...props}>
       <div className="w-100 tc pa3 relative z-2">
         <p className="b biryani f6 white ttu">Featured Mix</p>
-        <h1 className="mix-title mt0 mb2 anton white ttu">
+        <h1 className="mix-title mt0 mb3 anton white ttu">
           {/* Mint Condition w/ Hotthobo - 27th November 2017 */}
           {name}
         </h1>

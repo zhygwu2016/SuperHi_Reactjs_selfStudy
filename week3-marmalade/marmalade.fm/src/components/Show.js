@@ -3,6 +3,24 @@ import React, {Component} from 'react';
 import differenceInDays from 'date-fns/difference_in_days';
 import Stat from './Stat';
 
+const Tag = ({ name, url }) => (
+  <div className="mr2 mb2 0-70">
+    <a
+      className="block f6 link blue b ba bw1 b--blue gray br2 pv1 ph2 lh-title"
+      href={url} target="_blank"
+    >
+      { name }
+    </a>
+  </div>
+)
+
+// takes in a tags array and loops over them
+const Tags = ({tags = []}) => (
+  <div className="tags flex flex-wrap">
+    {tags.map(tag => <Tag {...tag} />)}
+  </div>
+)
+
 class Show extends Component {
   constructor(props){
     super(props);
@@ -14,7 +32,7 @@ class Show extends Component {
   // componentWillReceiveProps runs every timr our component gets some new props,
   // rather than just once like componentDidMount
   // meaning we can get and update the props every time some nre ones come in
-  
+
   // componentWillReceiveProps(nextProps){
   //   const {match} = this.props;
   //   const {mixes} = nextProps;
@@ -44,6 +62,9 @@ class Show extends Component {
     return (
       <div className="ph3 ph4-l pad-bottom">
         <div className="measure center 1h-copy">
+
+          <Tags tags={mix.tags} />
+
           <p>{mix.description}</p>
 
           <Stat
