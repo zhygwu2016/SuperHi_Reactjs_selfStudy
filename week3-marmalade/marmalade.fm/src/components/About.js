@@ -1,10 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import Stat from './Stat';
 
+// here we import the actions
+import actions from '../store/actions'
+console.log(actions);
 
-const About = ({mixes}) => (
+
+const About = ({mixes, currentMix, setMix}) => (
   <div className="pad-bottom ph3 ph4-l">
     <div className="measure center 1h-copy">
+
+      <div>
+        <button onClick={() => setMix('some future funky disco!')}>Set the redux state</button>
+        <h1>{currentMix}</h1>
+      </div>
 
       <p className="mt0">
         Marmalade.fm features the latest and greatest in grooves, beats and
@@ -25,9 +35,14 @@ const About = ({mixes}) => (
       {/* audio_length */}
       <Stat statName="With..." statNumber={mixes.reduce((accum, current) =>
       accum + current.audio_length, 0)} statWord="seconds" />
-      
+
     </div>
   </div>
 );
 
-export default About;
+// here we connect our component to the redux state
+// we pass it our entire state and all of our actions
+// this is a higher order component (a wrapper component)
+// that provides our About component with all our data
+export default connect(state => state, actions)(About);
+//export default About;
